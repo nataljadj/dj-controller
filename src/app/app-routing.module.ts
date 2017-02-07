@@ -2,6 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from "@angular/core";
 import { DjControllerComponent } from "./dj-controller/dj-controller.component";
 import { UploadTrackComponent } from "./upload-track/upload-track.component";
+import { DjControllerGuard } from './shared/services/dj-controller-guard';
 
 const routes: Routes = [
     {
@@ -17,7 +18,8 @@ const routes: Routes = [
     {
         path: 'dj-controller',
         component: DjControllerComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [DjControllerGuard]
     },
 ];
 
@@ -26,4 +28,5 @@ const routes: Routes = [
     exports: [RouterModule],
     providers: []
 })
+
 export class RoutingModule { }

@@ -6,6 +6,7 @@ import { RoutingModule } from "./app-routing.module";
 import { TrackListComponent } from './track-list/track-list.component'
 import { UploadTrackComponent } from "./upload-track/upload-track.component";
 import { TrackPlayerComponent } from "./track-player/track-player.component";
+import { DjControllerGuard } from './shared/services/dj-controller-guard';
 
 @NgModule({
     imports: [
@@ -19,6 +20,8 @@ import { TrackPlayerComponent } from "./track-player/track-player.component";
         UploadTrackComponent,
         TrackPlayerComponent
     ],
+    providers:[ DjControllerGuard ],
     bootstrap: [ AppComponent ]
 })
+
 export class AppModule { }
