@@ -1,6 +1,6 @@
 
 <div class="section">
-    <div class="">
+    <div class="logo-section">
         <img class="logo-img" src="./../../assets/images/dj-music-player.svg">
         <strong class="logo-text">Create your best tracks is easy now!</strong>
     </div>
@@ -8,14 +8,19 @@
     <div class="container">
         <div class="row">
             <div class="six columns">
-                <track-list></track-list>
+                <track-list [trackList]="firstTrackList"
+                            (onLoad)="putFirstTrackList($event)"></track-list>
             </div>
             <div class="six columns">
-                <track-list></track-list>
+                <track-list [trackList]="secondTrackList"
+                            (onLoad)="putSecondTrackList($event)"></track-list>
             </div>
         </div>
         <div class="row">
-            <a class="button" routerLink="/dj-controller" routerLinkActive="active">DJ Player</a>
+            <button class="button"
+               [disabled]="!(this.firstTrackList.length || this.secondTrackList.length)"
+               routerLink="/dj-controller"
+               routerLinkActive="active">DJ Player</button>
         </div>
     </div>
 </div>

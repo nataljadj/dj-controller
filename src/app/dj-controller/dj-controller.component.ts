@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { routerTransition } from './../shared/router.animation';
+import { SharedTackListService } from '../shared/services/shared-track-list.service'
+
 @Component({
     selector: 'dj-controller',
     templateUrl: 'dj-controller.component.html',
@@ -7,4 +9,18 @@ import { routerTransition } from './../shared/router.animation';
     host: {'[@routerTransition]': ''}
 })
 
-export class DjControllerComponent{}
+export class DjControllerComponent implements OnInit{
+
+    public firstTrackList:any = [];
+    public secondTrackList:any = [];
+
+    constructor(private sharedTackListService:SharedTackListService) {}
+
+    ngOnInit(){
+        this.getTrackLists();
+    }
+
+    private getTrackLists(){
+       this.firstTrackList = this.sharedTackListService.getFirstTrackList();
+    }
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'track-player',
@@ -6,8 +6,26 @@ import { Component } from '@angular/core';
 })
 
 export class TrackPlayerComponent {
-
-    title = 'Daily Deals';
+    @Input() trackList: any;
 
     constructor() {}
+
+    ngOnInit(){
+        if(this.trackList){
+            this.trackList.forEach((track:any) => {
+
+                track.uploader.onCompleteItem = (response:any, status:any, headers:any) => {
+                    console.log(response, status, headers)
+                };
+                if(!track.isUploading){
+                    track.upload();
+                }
+            });
+        }
+
+    }
+
+    private onUploaded(response:any, status:any, headers:any){
+        console.log(response, status, headers)
+    }
 }

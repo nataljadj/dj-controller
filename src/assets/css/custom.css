@@ -10,18 +10,32 @@
     margin-bottom: 1.2rem;
 }
 
+.dj-ctrl-section .button{
+    margin-top: 2rem;
+}
+
 .border-class{
     border-radius: 4px;
     border: 1px solid #bbb;
 }
 
+.logo-section{
+    height:60px
+}
+
 .logo-img{
-    width:60px
+    width: 60px;
 }
 
 .logo-text{
     text-transform: uppercase;
     color: #333;
+}
+
+.row .table-row td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Upload
@@ -30,6 +44,18 @@
     padding: 6px;
     margin: 10px auto;
     width: 60px;
+}
+
+.upload-overlay{
+    background: url('../images/upload.svg') no-repeat;
+    background-size: 60px;
+    padding: 6px;
+    margin: 10px auto;
+    height: 60px;
+}
+
+.upload-file #upload, .upload-file #upload1{
+    display:none;
 }
 
 .upload-file:hover{

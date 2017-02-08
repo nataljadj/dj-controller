@@ -7,11 +7,14 @@ import { TrackListComponent } from './track-list/track-list.component'
 import { UploadTrackComponent } from "./upload-track/upload-track.component";
 import { TrackPlayerComponent } from "./track-player/track-player.component";
 import { DjControllerGuard } from './shared/services/dj-controller-guard';
+import { FileUploadModule } from 'ng2-file-upload';
+import { SharedTackListService } from "./shared/services/shared-track-list.service";
 
 @NgModule({
     imports: [
         BrowserModule,
-        RoutingModule
+        RoutingModule,
+        FileUploadModule
     ],
     declarations: [
         AppComponent,
@@ -20,7 +23,7 @@ import { DjControllerGuard } from './shared/services/dj-controller-guard';
         UploadTrackComponent,
         TrackPlayerComponent
     ],
-    providers:[ DjControllerGuard ],
+    providers:[ DjControllerGuard, SharedTackListService],
     bootstrap: [ AppComponent ]
 })
 
