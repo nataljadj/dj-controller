@@ -7,6 +7,4 @@ To run app:
     HTML-loader null-loader raw-loader style-loader to-string-loader --save-dev
  3. npm start
 
- (Optional) In other case to try the app open github pages
- 
 
