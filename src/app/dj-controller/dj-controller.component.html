@@ -2,10 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="six columns">
-               <track-player [trackList]="firstTrackList"></track-player>
+               <track-player [trackList]="firstTrackList"
+               (onCurrentTrackChange)="setFirstSelectedTrack($event)"></track-player>
             </div>
             <div class="six columns">
-                <track-player></track-player>
+                <track-player [trackList]="secondTrackList"
+                              (onCurrentTrackChange)="setSecondSelectedTrack($event)"></track-player>
             </div>
         </div>
     </div>

@@ -1,52 +1,39 @@
-<div *ngIf="trackList?.length">
+<div>
     <div class="info-box">
         <span>Upload new tracks</span>
         <div class="border-class upload-file">
-            <label class="upload-overlay" for="upload1"></label>
-            <input id="upload1"
+            <label class="upload-overlay" for="{{name + 'upload'}}"></label>
+            <input id="{{name + 'upload'}}"
                    type="file"
                    accept="audio/*"
-                   ng2FileSelect
-                   [uploader]="uploader"
                    multiple
                    (change)="onFileUpload($event)" /><br/>
         </div>
     </div>
 
-    <table class="u-full-width">
-        <thead>
-        <tr class="row table-row">
-            <th class="ten columns">Track Name</th>
-            <th class="two columns">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="row table-row" *ngFor="let track of trackList; let i = index">
-            <td class="ten columns">{{track.file.name}}</td>
-            <td class="two columns">
-                <i class="fa fa-trash-o fa-lg" (click)="removeTrack(i)"></i>
-                <i *ngIf="track.selected" class="fa fa-pause fa-lg"></i>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="track-list row">
+        <table *ngIf="trackList?.length" class="u-full-width">
+            <thead>
+            <tr class="row table-row">
+                <th class="ten columns">Track Name</th>
+                <th class="two columns">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="row table-row" *ngFor="let track of trackList; let i = index" [ngClass]="{'selected': track.selected}">
+                <td class="ten columns">{{track.name}}</td>
+                <td class="two columns">
+                    <i class="fa fa-trash-o fa-lg" (click)="removeTrack(i)"></i>
+                    <i *ngIf="track.selected" class="fa fa-pause fa-lg"></i>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-<template [ngIf]="!trackList?.length">
-    <div class="info-box">
+    <div class="info-box" *ngIf="!trackList?.length">
          <span>
              You don't have any track to listen. Please, upload at least one track :)
          </span>
-        <div class="border-class upload-file">
-            <label class="upload-overlay" for="upload"></label>
-            <input id="upload"
-                   type="file"
-                   accept="audio/*"
-                   ng2FileSelect
-                   [uploader]="uploader"
-                   multiple
-                   (change)="onFileUpload($event)" /><br/>
-        </div>
-
     </div>
-</template>
+</div>

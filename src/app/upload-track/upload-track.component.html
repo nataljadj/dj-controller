@@ -9,11 +9,13 @@
         <div class="row">
             <div class="six columns">
                 <track-list [trackList]="firstTrackList"
-                            (onLoad)="putFirstTrackList($event)"></track-list>
+                            (onLoad)="putFirstTrackList($event)"
+                            [name]="'first'"></track-list>
             </div>
             <div class="six columns">
                 <track-list [trackList]="secondTrackList"
-                            (onLoad)="putSecondTrackList($event)"></track-list>
+                            (onLoad)="putSecondTrackList($event)"
+                            [name]="'second'"></track-list>
             </div>
         </div>
         <div class="row">

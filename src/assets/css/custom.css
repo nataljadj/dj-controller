@@ -32,10 +32,19 @@
     color: #333;
 }
 
+.track-list{
+    max-height: 180px;
+    overflow-y: scroll;
+}
+
 .row .table-row td{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.row .table-row.selected{
+   background-color: #a0bfda;
 }
 
 /* Upload
@@ -44,6 +53,7 @@
     padding: 6px;
     margin: 10px auto;
     width: 60px;
+    height: 85px;
 }
 
 .upload-overlay{
@@ -52,9 +62,10 @@
     padding: 6px;
     margin: 10px auto;
     height: 60px;
+    cursor: pointer;
 }
 
-.upload-file #upload, .upload-file #upload1{
+.upload-file [id*="upload"]{
     display:none;
 }
 

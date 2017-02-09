@@ -2,32 +2,38 @@
     <img src="../../assets/images/compact-disc.svg">
 
     <div>
-        <audio controls="controls"></audio>
+        <audio (canplay)="canPlay()"
+               #audioPlayer
+               controls="controls"
+               src="{{currentTrack.src}}"></audio>
     </div>
     <div class="row">
         <div class="two columns ">
-            <div class="border-class">
+            <div class="border-class" (click)="previousTrack()">
                 <i class="fa fa-step-backward fa-lg"></i>
             </div>
         </div>
         <div class="two columns ">
-            <div class="border-class">
+            <div class="border-class" (click)="makeSpeedSlower()">
                 <i class="fa fa-fast-backward fa-lg"></i>
             </div>
 
         </div>
         <div class="four columns ">
-            <div class="border-class">
+            <div *ngIf="!isPlaying" class="border-class" (click)="playTrack()" >
                 <i class="fa fa-play fa-lg"></i>
+            </div>
+            <div *ngIf="isPlaying" class="border-class" (click)="pauseTrack()" >
+                <i class="fa fa-pause fa-lg"></i>
             </div>
         </div>
         <div class="two columns ">
-            <div class="border-class">
+            <div class="border-class" (click)="makeSpeedFasrer()">
                 <i class="fa fa-fast-forward fa-lg"></i>
             </div>
         </div>
-        <div class="two columns ">
-            <div class="border-class">
+        <div class="two columns">
+            <div class="border-class" (click)="nextTrack()">
                 <i class="fa fa-step-forward fa-lg"></i>
             </div>
         </div>

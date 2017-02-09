@@ -8,14 +8,12 @@ import { FileUploader } from 'ng2-file-upload';
 
 export class TrackListComponent {
     @Input() trackList:any;
+    @Input() name: string;
     @Output() onLoad = new EventEmitter();
 
-    private readonly URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
-
-    public uploader:FileUploader = new FileUploader({url:this.URL});
-
     public onFileUpload(e: any){
-        this.trackList = this.uploader.queue;
+        let tracks = e.target.files;
+        this.trackList.push.apply(this.trackList, tracks);
         this.onLoad.emit(this.trackList);
     }
 
