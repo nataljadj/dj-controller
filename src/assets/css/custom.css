@@ -10,7 +10,7 @@
     margin-bottom: 1.2rem;
 }
 
-.dj-ctrl-section .button{
+.button.switch-btn{
     margin-top: 2rem;
 }
 
@@ -23,18 +23,19 @@
     height:60px
 }
 
-.logo-img{
+.logo-section .logo-img{
     width: 60px;
 }
 
-.logo-text{
+.logo-section .logo-text{
     text-transform: uppercase;
     color: #333;
+    vertical-align: super;
 }
 
 .track-list{
-    max-height: 180px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .row .table-row td{
@@ -45,6 +46,32 @@
 
 .row .table-row.selected{
    background-color: #a0bfda;
+}
+
+/* Track-Player
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.player-section .btn{
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.player-section .btn.disabled{
+    cursor: default;
+}
+
+.player-section .btn.disabled i{
+    color: #D1D1D1;
+}
+
+.progress-bar{
+    background-color: #76c5c8;
+    height: 5px;
+    margin: auto;
+    position: relative;
+}
+
+.progress-bar[value] {
+    background-color: #0FA0CE;
 }
 
 /* Upload
@@ -92,12 +119,20 @@
     .section {
         padding: 8rem 0 8rem;
     }
+
+    .track-list{
+        max-height: 20rem;
+    }
 }
 
 /* Bigger than 1000 */
 @media (min-width: 1000px) {
     .section {
         padding: 6rem 0 10rem;
+    }
+
+    .track-list{
+        max-height: 70rem;
     }
 }
 

@@ -3,16 +3,38 @@
         <div class="row">
             <div class="six columns">
                <track-player [trackList]="firstTrackList"
-               (onCurrentTrackChange)="setFirstSelectedTrack($event)"></track-player>
+                             (onCurrentTrackChange)="setFirstSelectedTrack($event)"
+                             [globalPlay]="globalPlay"
+                             [globalVolumeValue]="globalVolumeValue"></track-player>
             </div>
             <div class="six columns">
                 <track-player [trackList]="secondTrackList"
-                              (onCurrentTrackChange)="setSecondSelectedTrack($event)"></track-player>
+                              (onCurrentTrackChange)="setSecondSelectedTrack($event)"
+                              [globalPlay]="globalPlay"
+                              [globalVolumeValue]="globalVolumeValue"></track-player>
             </div>
+        </div>
+
+        <div class="row">
+            <button *ngIf="!globalPlay"
+                    (click)="playAll()"
+                    class="button button-primary switch-btn">
+                <i class="fa fa-play fa-lg"></i>
+            </button>
+            <button *ngIf="globalPlay"
+                    (click)="pauseAll()"
+                    class="button  switch-btn">
+                <i class="fa fa-pause fa-lg"></i>
+            </button>
+            <div>
+                <i class="fa fa-volume-up fa-lg"></i>
+                <progress class="progress-bar" value="{{globalVolumeValue}}" max="1" (click)="changeVolumeValue($event)" ></progress>
+            </div>
+
         </div>
     </div>
 
-    <a class="button button-primary"
+    <a class="button switch-btn button-primary"
        routerLink="/upload"
        routerLinkActive="active">Track Menu Bar</a>
 </div>

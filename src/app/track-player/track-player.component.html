@@ -1,4 +1,4 @@
-<div>
+<div class="player-section">
     <img src="../../assets/images/compact-disc.svg">
 
     <div>
@@ -9,31 +9,50 @@
     </div>
     <div class="row">
         <div class="two columns ">
-            <div class="border-class" (click)="previousTrack()">
+            <div class="border-class btn"
+                 title="Previous track"
+                 [ngClass]="{'disabled': currentIndex === 0 || !trackList.length || !isPlaying}"
+                 (click)="previousTrack()">
                 <i class="fa fa-step-backward fa-lg"></i>
             </div>
         </div>
         <div class="two columns ">
-            <div class="border-class" (click)="makeSpeedSlower()">
+            <div class="border-class btn"
+                 title="Slow temp"
+                 [ngClass]="{'disabled': !trackList?.length || !isPlaying}"
+                 (click)="makeSpeedSlower()">
                 <i class="fa fa-fast-backward fa-lg"></i>
             </div>
 
         </div>
         <div class="four columns ">
-            <div *ngIf="!isPlaying" class="border-class" (click)="playTrack()" >
+            <div *ngIf="!isPlaying"
+                 class="border-class btn "
+                 title="Play track"
+                 [ngClass]="{'disabled': !trackList?.length}"
+                 (click)="playTrack()" >
                 <i class="fa fa-play fa-lg"></i>
             </div>
-            <div *ngIf="isPlaying" class="border-class" (click)="pauseTrack()" >
+            <div *ngIf="isPlaying && trackList?.length"
+                 title="Pause track"
+                 class="border-class btn"
+                 (click)="pauseTrack()" >
                 <i class="fa fa-pause fa-lg"></i>
             </div>
         </div>
-        <div class="two columns ">
-            <div class="border-class" (click)="makeSpeedFasrer()">
+        <div class="two columns" [ngClass]="{'disabled': !trackList?.length}">
+            <div class="border-class btn"
+                 title="Fast temp"
+                 [ngClass]="{'disabled': !trackList?.length || !isPlaying}"
+                 (click)="makeSpeedFaster()">
                 <i class="fa fa-fast-forward fa-lg"></i>
             </div>
         </div>
         <div class="two columns">
-            <div class="border-class" (click)="nextTrack()">
+            <div class="border-class btn"
+                 title="Next track"
+                 [ngClass]="{'disabled': currentIndex === (trackList.length -1) || !trackList?.length || !isPlaying}"
+                 (click)="nextTrack()">
                 <i class="fa fa-step-forward fa-lg"></i>
             </div>
         </div>

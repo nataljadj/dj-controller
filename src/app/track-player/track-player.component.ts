@@ -1,44 +1,60 @@
-import {Component, Input, ViewChild, Output, EventEmitter, OnInit} from '@angular/core';
+import { Component, Input, ViewChild, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'track-player',
     templateUrl: 'track-player.component.html',
 })
 
-export class TrackPlayerComponent implements OnInit{
+export class TrackPlayerComponent implements OnInit, OnChanges{
     @Input() trackList: any;
+    @Input() globalPlay:boolean;
+    @Input() globalVolumeValue:number;
     @Output() onCurrentTrackChange = new EventEmitter();
     @ViewChild ('audioPlayer') audioPlayer: any;
 
     public currentIndex: number = 0;
     public currentTrack: any = {};
     public isPlaying:boolean = false;
-    public canPlayAgain:boolean = false;
+    public isLoaded:boolean = false;
 
     ngOnInit(){
         this.getCurrentIndex();
     }
 
-    public playTrack(){
-        if(this.trackList){
-            if(this.canPlayAgain){
-                this.audioPlayer.nativeElement.play();
-            } else this.load();
+    ngOnChanges(event: any){
+        if(event.globalPlay){
+          event.globalPlay.currentValue ? this.playTrack() : this.pauseTrack();
         }
 
-        this.isPlaying = true;
+        if(event.globalVolumeValue && this.audioPlayer.nativeElement){
+          this.audioPlayer.nativeElement.volume = event.globalVolumeValue.currentValue;
+        }
+    }
+
+    public playTrack(){
+        if(this.trackList.length){
+            if(this.isLoaded){
+                this.audioPlayer.nativeElement.play();
+            } else {
+              this.load();
+            }
+
+          this.isPlaying = true;
+        }
     }
 
     public pauseTrack(){
-        this.audioPlayer.nativeElement.pause();
-        this.isPlaying = false;
+        if(this.audioPlayer.nativeElement){
+          this.audioPlayer.nativeElement.pause();
+          this.isPlaying = false;
+        }
     }
 
     public nextTrack(){
-        if(this.trackList.length > this.currentIndex ){
+        if((this.trackList.length - 1) > this.currentIndex ){
             this.currentIndex++;
             this.load();
-            this.canPlayAgain = false;
+            this.isLoaded = false;
         }
     }
 
@@ -46,25 +62,25 @@ export class TrackPlayerComponent implements OnInit{
         if(this.currentIndex > 0){
             this.currentIndex--;
             this.load();
-            this.canPlayAgain = false;
+            this.isLoaded = false;
         }
     }
 
     public makeSpeedSlower(){
-        if(this.audioPlayer.nativeElement.playbackRate){
+        if(this.audioPlayer.nativeElement.playbackRate && this.isPlaying){
             this.audioPlayer.nativeElement.playbackRate -= 0.25;
         }
     }
 
-    public makeSpeedFasrer(){
-        if(this.audioPlayer.nativeElement.playbackRate){
+    public makeSpeedFaster(){
+        if(this.audioPlayer.nativeElement.playbackRate && this.isPlaying){
             this.audioPlayer.nativeElement.playbackRate += 0.25;
         }
     }
 
     public canPlay(){
         this.audioPlayer.nativeElement.play();
-        this.canPlayAgain = true;
+        this.isLoaded = true;
         this.onCurrentTrackChange.emit(this.currentIndex);
     }
 

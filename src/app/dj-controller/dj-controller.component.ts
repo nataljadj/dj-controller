@@ -14,7 +14,9 @@ export class DjControllerComponent implements OnInit{
     public firstTrackList:any = [];
     public secondTrackList:any = [];
     public tmpIndex:number;
-    public tmpIndex2:number;
+    public secondTmpIndex:number;
+    public globalPlay:boolean = false;
+    public globalVolumeValue:number = 0.2;
 
     constructor(private sharedTackListService:SharedTackListService) {}
 
@@ -27,23 +29,37 @@ export class DjControllerComponent implements OnInit{
        this.secondTrackList = this.sharedTackListService.getSecondTrackList()
     }
 
-    public setFirstSelectedTrack(index: number){
-        this.firstTrackList[index].selected = true;
-        if(this.tmpIndex !== undefined) {
-            (this.firstTrackList[this.tmpIndex].selected = false);
-        }
-        this.tmpIndex = index;
+    public playAll(){
+        this.globalPlay = true;
+    }
 
-        this.sharedTackListService.setFirstTrackList(this.firstTrackList);
+    public pauseAll(){
+        this.globalPlay = false;
+    }
+
+    public changeVolumeValue($event: any){
+      this.globalVolumeValue = $event.offsetX * $event.target.max / $event.target.offsetWidth
+    }
+
+    public setFirstSelectedTrack(index: number){
+        if(this.tmpIndex !== index){
+            this.firstTrackList[index].selected = true;
+            if(this.tmpIndex !== undefined) {
+                (this.firstTrackList[this.tmpIndex].selected = false);
+            }
+            this.tmpIndex = index;
+
+            this.sharedTackListService.setFirstTrackList(this.firstTrackList);
+        }
     }
 
     public setSecondSelectedTrack(index: number){
         this.secondTrackList[index].selected = true;
-        if(this.tmpIndex2 !== undefined){
-            this.secondTrackList[this.tmpIndex2].selected = false;
+        if(this.secondTmpIndex !== undefined){
+            this.secondTrackList[this.secondTmpIndex].selected = false;
         }
 
-        this.tmpIndex2 = index;
+        this.secondTmpIndex = index;
 
         this.sharedTackListService.setSecondTrackList(this.secondTrackList);
     }
