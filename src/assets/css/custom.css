@@ -50,6 +50,10 @@
 
 /* Track-Player
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.player-section img{
+    width:80%;
+}
+
 .player-section .btn{
     padding: 5px 0;
     cursor: pointer;
